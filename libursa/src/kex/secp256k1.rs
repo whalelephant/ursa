@@ -166,7 +166,7 @@ mod ecdh_secp256k1 {
                     sk.clone_from_slice(d.as_slice());
                 }
             };
-            let k256_sk = k256::SecretKey::from_bytes(&sk)
+            let k256_sk = k256::SecretKey::from_be_bytes(&sk)
                 .map_err(|e| CryptoError::ParseError(format!("{:?}", e)))?;
             let k256_pk = k256_sk.public_key();
             use k256::elliptic_curve::sec1::ToEncodedPoint;
@@ -183,7 +183,7 @@ mod ecdh_secp256k1 {
         where
             D: Digest<OutputSize = U32> + Default,
         {
-            let sk = k256::SecretKey::from_bytes(&local_private_key)
+            let sk = k256::SecretKey::from_be_bytes(&local_private_key.0)
                 .map_err(|e| CryptoError::ParseError(format!("{:?}", e)))?;
 
             let pk = k256::PublicKey::from_sec1_bytes(&remote_public_key[..])
@@ -191,7 +191,7 @@ mod ecdh_secp256k1 {
 
             //Note: this does not return possibility of error.
             let shared_secret =
-                k256::elliptic_curve::ecdh::diffie_hellman(sk.to_secret_scalar(), pk.as_affine());
+                k256::elliptic_curve::ecdh::diffie_hellman(sk.to_nonzero_scalar(), pk.as_affine());
             Ok(SessionKey(shared_secret.as_bytes().to_vec()))
         }
     }
