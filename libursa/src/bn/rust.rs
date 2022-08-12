@@ -2,7 +2,9 @@ use errors::prelude::*;
 
 #[cfg(not(feature = "cl_onchain"))]
 use glass_pumpkin::{prime, safe_prime};
-use num_bigint::{BigInt, BigUint, RandBigInt, Sign, ToBigInt};
+#[cfg(not(feature = "cl_onchain"))]
+use num_bigint::RandBigInt;
+use num_bigint::{BigInt, BigUint, Sign, ToBigInt};
 use num_integer::Integer;
 use num_traits::identities::{One, Zero};
 use num_traits::{Num, Pow, Signed, ToPrimitive};

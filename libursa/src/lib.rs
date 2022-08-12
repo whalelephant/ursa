@@ -82,6 +82,8 @@ extern crate int_traits;
 extern crate log;
 #[cfg(feature = "num-bigint")]
 extern crate num_bigint;
+#[cfg(feature = "num-bigint-onchain")]
+extern crate num_bigint_onchain as num_bigint;
 #[cfg(feature = "num-integer")]
 extern crate num_integer;
 #[cfg(feature = "num-traits")]
