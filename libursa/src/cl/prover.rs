@@ -1,3 +1,5 @@
+#![cfg(not(feature = "cl_onchain"))]
+
 use super::helpers::*;
 use bn::BigNumber;
 use cl::constants::*;

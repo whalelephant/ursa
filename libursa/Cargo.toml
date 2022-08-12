@@ -75,6 +75,7 @@ bls_bls12381 = ["amcl_wrapper", "hex", "hkdf", "sha2/std", "zeroize"]
 bls_bn254 = ["amcl", "failure", "log", "rand", "sha2/std", "sha3"]
 bls_bn254_asm = ["amcl", "failure", "log", "rand", "sha2/asm", "sha3"]
 cl = ["amcl", "failure", "glass_pumpkin", "int_traits", "lazy_static", "log", "num-bigint", "num-integer", "num-traits", "rand", "sha2/std"]
+cl_onchain = ["amcl_onchain", "failure", "int_traits", "lazy_static", "log", "num-bigint", "num-integer", "num-traits", "sha2/std"]
 cl_native = ["amcl", "failure", "int_traits", "lazy_static", "log", "openssl", "rand"]
 chacha20poly1305 = ["aead", "hex", "rand", "rustchacha20poly1305", "zeroize"]
 chacha20poly1305_native = ["chacha20poly1305"]
@@ -111,6 +112,8 @@ aead = { version = "0.3", optional = true }
 aes = { version = "0.6", optional = true }
 aes-gcm = { version = "0.8", optional = true }
 amcl = { version = "0.2",  optional = true, default-features = false, features = ["bn254"]}
+# amcl_onchain = { package = "amcl", path = "../../Nym/incubator-milagro-crypto-rust", default-features = false, features = ["onchain"], optional = true}
+amcl_onchain = { package = "amcl", git = "https://github.com/whalelephant/incubator-milagro-crypto-rust", branch = "onchain", default-features = false, features = ["onchain"], optional = true}
 amcl_wrapper = {version = "0.4.0", features = ["bls381"], optional = true }
 arrayref = { version = "0.3.5", optional = true }
 blake2 = { version = "0.9", default-features = false, optional = true }

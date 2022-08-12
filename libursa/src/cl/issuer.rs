@@ -1,3 +1,5 @@
+#![cfg(not(feature = "cl_onchain"))]
+
 use bn::BigNumber;
 use cl::constants::*;
 use cl::hash::get_hash_as_int;

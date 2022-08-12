@@ -27,6 +27,7 @@ use std::iter::FromIterator;
 ///
 /// let _nonce = new_nonce().unwrap();
 /// ```
+#[cfg(not(feature = "cl_onchain"))]
 pub fn new_nonce() -> UrsaCryptoResult<Nonce> {
     helpers::bn_rand(constants::LARGE_NONCE)
 }

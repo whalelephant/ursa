@@ -8,8 +8,12 @@ compile_error!("Cannot compile both features 'ecdsa_sepc256k1' and 'ecdsa_secp25
 compile_error!("Cannot compile both features 'ecdsa_sepc256k1_native' and 'ecdsa_secp256k1_asm'");
 #[cfg(all(feature = "ed25519", feature = "ed25519_asm"))]
 compile_error!("Cannot compile both features 'ed25519' and 'ed25519_asm'");
-#[cfg(all(feature = "cl", feature = "cl_native"))]
-compile_error!("Cannot compile both features 'cl' and 'cl_native'");
+#[cfg(any(
+    all(feature = "cl", feature = "cl_native"),
+    all(feature = "cl", feature = "cl_onchain"),
+    all(feature = "cl_onchain", feature = "cl_native")
+))]
+compile_error!("Cannot compile features 'cl', 'cl_native', 'cl_onchain'");
 
 #[cfg(feature = "aead")]
 extern crate aead;
@@ -19,6 +23,8 @@ extern crate aes;
 extern crate aes_gcm;
 #[cfg(feature = "amcl")]
 extern crate amcl;
+#[cfg(feature = "amcl_onchain")]
+extern crate amcl_onchain as amcl;
 #[cfg(feature = "block-modes")]
 extern crate block_modes;
 #[cfg(feature = "block-padding")]
@@ -65,6 +71,7 @@ extern crate int_traits;
 #[cfg_attr(
     any(
         feature = "cl",
+        feature = "cl_onchain",
         feature = "cl_native",
         feature = "sharing",
         feature = "sharing_native",
@@ -110,6 +117,7 @@ extern crate x25519_dalek;
 #[cfg(any(
     feature = "bls_bls12381",
     feature = "cl",
+    feature = "cl_onchain",
     feature = "cl_native",
     feature = "ecdh_secp256k1",
     feature = "ecdh_secp256k1_native",
@@ -132,10 +140,10 @@ pub mod bls;
 #[cfg(any(feature = "cl_native", feature = "sharing_native"))]
 #[path = "bn/openssl.rs"]
 pub mod bn;
-#[cfg(any(feature = "cl", feature = "sharing"))]
+#[cfg(any(feature = "cl", feature = "sharing", feature = "cl_onchain"))]
 #[path = "bn/rust.rs"]
 pub mod bn;
-#[cfg(any(feature = "cl", feature = "cl_native"))]
+#[cfg(any(feature = "cl", feature = "cl_native", feature = "cl_onchain"))]
 pub mod cl;
 #[cfg(any(
     feature = "aescbc",
@@ -152,6 +160,7 @@ pub mod encryption;
     feature = "ecdsa_secp256k1_native",
     feature = "ecdsa_secp256k1_asm",
     feature = "cl",
+    feature = "cl_onchain",
     feature = "cl_native",
     feature = "sharing",
     feature = "sharing_native",
@@ -190,6 +199,7 @@ pub mod keys;
     feature = "bls_bn254",
     feature = "bls_bn254_asm",
     feature = "cl",
+    feature = "cl_onchain",
     feature = "cl_native"
 ))]
 #[path = "pair/amcl.rs"]
@@ -282,6 +292,7 @@ impl From<bitcoinsecp256k1::Error> for CryptoError {
     feature = "ecdsa_secp256k1_native",
     feature = "ecdsa_secp256k1_asm",
     feature = "cl",
+    feature = "cl_onchain",
     feature = "cl_native",
     feature = "sharing",
     feature = "sharing_native",

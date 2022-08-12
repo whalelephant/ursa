@@ -64,11 +64,12 @@ pub fn bn_rand(size: usize) -> UrsaCryptoResult<BigNumber> {
     _bn_rand(size)
 }
 
-#[cfg(not(test))]
+#[cfg(not(any(test, feature = "cl_onchain")))]
 pub fn bn_rand(size: usize) -> UrsaCryptoResult<BigNumber> {
     _bn_rand(size)
 }
 
+#[cfg(not(feature = "cl_onchain"))]
 pub fn _bn_rand(size: usize) -> UrsaCryptoResult<BigNumber> {
     trace!("Helpers::bn_rand: >>> size:: {:?}", size);
 
@@ -84,11 +85,12 @@ pub fn bn_rand_range(_bn: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     BigNumber::from_dec("6355086599653879826316700099928903465759924565682653297540990486160410136991969646604012568191576052570982028627086748382054319397088948628665022843282950799083156383516421449932691541760677147872377591267323656783938723945915297920233965100454678367417561768144216659060966399182536425206811620699453941460281449071103436526749575365638254352831881150836568830779323361579590121888491911166612382507532248659384681554612887580241255323056245170208421770819447066550669981130450421507202133758209950007973511221223647764045990479619451838104977691662868482078262695232806059726002249095643117917855811948311863670130")
 }
 
-#[cfg(not(test))]
+#[cfg(not(any(test, feature = "cl_onchain")))]
 pub fn bn_rand_range(bn: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     _bn_rand_range(bn)
 }
 
+#[cfg(not(feature = "cl_onchain"))]
 pub fn _bn_rand_range(bn: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     trace!("Helpers::bn_rand_range: >>> bn:: {:?}", bn);
 
@@ -129,11 +131,12 @@ pub fn generate_v_prime_prime() -> UrsaCryptoResult<BigNumber> {
     _generate_v_prime_prime()
 }
 
-#[cfg(not(test))]
+#[cfg(not(any(test, feature = "cl_onchain")))]
 pub fn generate_v_prime_prime() -> UrsaCryptoResult<BigNumber> {
     _generate_v_prime_prime()
 }
 
+#[cfg(not(feature = "cl_onchain"))]
 pub fn _generate_v_prime_prime() -> UrsaCryptoResult<BigNumber> {
     trace!("Helpers::generate_v_prime_prime: >>>");
 
@@ -157,11 +160,11 @@ pub fn generate_prime_in_range(start: &BigNumber, end: &BigNumber) -> UrsaCrypto
     _generate_prime_in_range(start, end)
 }
 
-#[cfg(not(test))]
+#[cfg(not(any(test, feature = "cl_onchain")))]
 pub fn generate_prime_in_range(start: &BigNumber, end: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     _generate_prime_in_range(start, end)
 }
-
+#[cfg(not(feature = "cl_onchain"))]
 pub fn _generate_prime_in_range(start: &BigNumber, end: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     trace!(
         "Helpers::generate_prime_in_range: >>> start: {:?}, end: {:?}",
@@ -192,11 +195,12 @@ pub fn generate_safe_prime(size: usize) -> UrsaCryptoResult<BigNumber> {
     _generate_safe_prime(size)
 }
 
-#[cfg(not(test))]
+#[cfg(not(any(test, feature = "cl_onchain")))]
 pub fn generate_safe_prime(size: usize) -> UrsaCryptoResult<BigNumber> {
     _generate_safe_prime(size)
 }
 
+#[cfg(not(feature = "cl_onchain"))]
 pub fn _generate_safe_prime(size: usize) -> UrsaCryptoResult<BigNumber> {
     trace!("Helpers::generate_safe_prime: >>> size: {:?}", size);
 
@@ -218,11 +222,12 @@ pub fn gen_x(p: &BigNumber, q: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     _gen_x(p, q)
 }
 
-#[cfg(not(test))]
+#[cfg(not(any(test, feature = "cl_onchain")))]
 pub fn gen_x(p: &BigNumber, q: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     _gen_x(p, q)
 }
 
+#[cfg(not(any(test, feature = "cl_onchain")))]
 pub fn _gen_x(p: &BigNumber, q: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     trace!("Helpers::gen_x: >>> p: {:?}, q: {:?}", p, q);
 
@@ -243,11 +248,12 @@ pub fn random_qr(n: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     _random_qr(n)
 }
 
-#[cfg(not(test))]
+#[cfg(not(any(test, feature = "cl_onchain")))]
 pub fn random_qr(n: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     _random_qr(n)
 }
 
+#[cfg(not(feature = "cl_onchain"))]
 pub fn _random_qr(n: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     trace!("Helpers::random_qr: >>> n: {:?}", n);
 
@@ -292,6 +298,7 @@ pub fn transform_u32_to_array_of_u8(x: u32) -> Vec<u8> {
     result
 }
 
+#[cfg(not(feature = "cl_onchain"))]
 pub fn get_mtilde<S: ::std::hash::BuildHasher>(
     unrevealed_attrs: &HashSet<String, S>,
     mtilde: &mut HashMap<String, BigNumber, S>,

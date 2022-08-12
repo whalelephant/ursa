@@ -87,6 +87,11 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ee5cca1ddc8b9dceb55b7f1272a9d1e643d73006f350a20ab4926d24e33f0f0d"
 
 [[package]]
+name = "amcl"
+version = "0.3.0"
+source = "git+https://github.com/whalelephant/incubator-milagro-crypto-rust?branch=onchain#9c48a2ccbb23828b3627e15d389cf67acf8bdda4"
+
+[[package]]
 name = "amcl_wrapper"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1622,7 +1627,8 @@ dependencies = [
  "aead",
  "aes",
  "aes-gcm",
- "amcl",
+ "amcl 0.2.0",
+ "amcl 0.3.0",
  "amcl_wrapper",
  "arrayref",
  "blake2",

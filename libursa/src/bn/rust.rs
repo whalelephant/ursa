@@ -1,10 +1,12 @@
 use errors::prelude::*;
 
+#[cfg(not(feature = "cl_onchain"))]
 use glass_pumpkin::{prime, safe_prime};
 use num_bigint::{BigInt, BigUint, RandBigInt, Sign, ToBigInt};
 use num_integer::Integer;
 use num_traits::identities::{One, Zero};
 use num_traits::{Num, Pow, Signed, ToPrimitive};
+#[cfg(not(feature = "cl_onchain"))]
 use rand::rngs::OsRng;
 use sha2::{self, Digest};
 
@@ -21,6 +23,7 @@ pub struct BigNumber {
     bn: BigInt,
 }
 
+#[cfg(not(feature = "cl_onchain"))]
 macro_rules! prime_generation {
     ($f:ident, $size:ident, $msg:expr) => {
         match $f::new($size)?.to_bigint() {
@@ -33,6 +36,7 @@ macro_rules! prime_generation {
     };
 }
 
+#[cfg(not(feature = "cl_onchain"))]
 macro_rules! prime_check {
     ($f:ident, $value:expr, $msg:expr) => {
         if $value.is_negative() {
@@ -58,14 +62,17 @@ impl BigNumber {
         Ok(BigNumber { bn: BigInt::zero() })
     }
 
+    #[cfg(not(feature = "cl_onchain"))]
     pub fn generate_prime(size: usize) -> UrsaCryptoResult<BigNumber> {
         prime_generation!(prime, size, "Unable to generate prime")
     }
 
+    #[cfg(not(feature = "cl_onchain"))]
     pub fn generate_safe_prime(size: usize) -> UrsaCryptoResult<BigNumber> {
         prime_generation!(safe_prime, size, "Unable to generate safe prime")
     }
 
+    #[cfg(not(feature = "cl_onchain"))]
     pub fn generate_prime_in_range(
         start: &BigNumber,
         end: &BigNumber,
@@ -118,20 +125,24 @@ impl BigNumber {
         }
     }
 
+    #[cfg(not(feature = "cl_onchain"))]
     pub fn is_prime(&self, _ctx: Option<&mut BigNumberContext>) -> UrsaCryptoResult<bool> {
         prime_check!(prime, self, "An error in is_prime")
     }
 
+    #[cfg(not(feature = "cl_onchain"))]
     pub fn is_safe_prime(&self, _ctx: Option<&mut BigNumberContext>) -> UrsaCryptoResult<bool> {
         prime_check!(safe_prime, self, "An error in is_safe_prime")
     }
 
+    #[cfg(not(feature = "cl_onchain"))]
     pub fn rand(size: usize) -> UrsaCryptoResult<BigNumber> {
         let mut rng = OsRng::default();
         let res = rng.gen_biguint(size as u64).to_bigint();
         Ok(BigNumber { bn: res.unwrap() })
     }
 
+    #[cfg(not(feature = "cl_onchain"))]
     pub fn rand_range(&self) -> UrsaCryptoResult<BigNumber> {
         let mut rng = OsRng::default();
         let res = rng.gen_bigint_range(&BigInt::zero(), &self.bn);
@@ -477,6 +488,7 @@ impl BigNumber {
         self.mul(&b.inverse(&p, None)?, None)?.modulus(&p, None)
     }
 
+    #[cfg(not(feature = "cl_onchain"))]
     pub fn random_qr(n: &BigNumber) -> UrsaCryptoResult<BigNumber> {
         let qr = n.rand_range()?.sqr(None)?.modulus(&n, None)?;
         Ok(qr)
@@ -571,6 +583,7 @@ impl<'a> Deserialize<'a> for BigNumber {
     }
 }
 
+#[cfg(not(feature = "cl_onchain"))]
 impl From<glass_pumpkin::error::Error> for UrsaCryptoError {
     fn from(err: glass_pumpkin::error::Error) -> UrsaCryptoError {
         UrsaCryptoError::from_msg(
@@ -580,6 +593,7 @@ impl From<glass_pumpkin::error::Error> for UrsaCryptoError {
     }
 }
 
+#[cfg(not(feature = "cl_onchain"))]
 impl From<rand::Error> for UrsaCryptoError {
     fn from(err: rand::Error) -> UrsaCryptoError {
         UrsaCryptoError::from_msg(
