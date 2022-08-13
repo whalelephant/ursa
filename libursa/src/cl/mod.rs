@@ -860,7 +860,7 @@ impl BlindedCredentialSecretsCorrectnessProof {
 /// “Sub Proof Request” - input to create a Proof for a credential;
 /// Contains attributes to be revealed and predicates.
 #[derive(Debug, Clone)]
-#[cfg_attr(feature = "serde", derive(Deserialize))]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct SubProofRequest {
     revealed_attrs: BTreeSet<String>,
     predicates: BTreeSet<Predicate>,
