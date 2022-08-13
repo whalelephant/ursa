@@ -476,14 +476,14 @@ pub fn calc_tne<S: ::std::hash::BuildHasher>(
     Ok(tau_list)
 }
 
-#[cfg(not(feature = "onchain"))]
+#[cfg(not(feature = "cl_onchain"))]
 fn largest_square_less_than(delta: usize) -> usize {
     (delta as f64).sqrt().floor() as usize
 }
 
 //Express the natural number `delta` as a sum of four integer squares,
 // i.e `delta = a^2 + b^2 + c^2 + d^2` using Lagrange's four-square theorem
-#[cfg(not(feature = "onchain"))]
+#[cfg(not(feature = "cl_onchain"))]
 pub fn four_squares(delta: i32) -> UrsaCryptoResult<HashMap<String, BigNumber>> {
     trace!("Helpers::four_squares: >>> delta: {:?}", delta);
 
