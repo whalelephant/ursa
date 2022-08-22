@@ -265,6 +265,7 @@ pub fn _random_qr(n: &BigNumber) -> UrsaCryptoResult<BigNumber> {
 }
 
 //TODO: FIXME very inefficient code
+#[cfg(not(feature = "cl_onchain"))]
 pub fn bitwise_or_big_int(a: &BigNumber, b: &BigNumber) -> UrsaCryptoResult<BigNumber> {
     trace!("Helpers::bitwise_or_big_int: >>> a: {:?}, b: {:?}", a, b);
 

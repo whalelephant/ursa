@@ -4,7 +4,9 @@ use errors::prelude::*;
 use glass_pumpkin::{prime, safe_prime};
 #[cfg(not(feature = "cl_onchain"))]
 use num_bigint::RandBigInt;
-use num_bigint::{BigInt, BigUint, Sign, ToBigInt};
+use num_bigint::{BigInt, Sign};
+#[cfg(not(feature = "cl_onchain"))]
+use num_bigint::{BigUint, ToBigInt};
 use num_integer::Integer;
 use num_traits::identities::{One, Zero};
 use num_traits::{Num, Pow, Signed, ToPrimitive};
