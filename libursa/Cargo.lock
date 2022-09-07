@@ -757,7 +757,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5eac7b86325ee905c72e2cb43a80b1ebe6ea82d7f0854d669190bcdc4b927762"
 dependencies = [
  "lazy_static",
- "num-bigint",
+ "num-bigint 0.3.3",
  "num-integer",
  "num-traits",
  "rand 0.7.3",
@@ -934,6 +934,16 @@ name = "miracl_core"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4330eca86d39f2b52d0481aa1e90fe21bfa61f11b0bf9b48ab95595013cefe48"
+
+[[package]]
+name = "num-bigint"
+version = "0.3.0"
+source = "git+https://github.com/whalelephant/num-bigint?rev=d74a4d6#d74a4d63c00f7ad4478038290289e9750f9bdbe8"
+dependencies = [
+ "autocfg 1.1.0",
+ "num-integer",
+ "num-traits",
+]
 
 [[package]]
 name = "num-bigint"
@@ -1653,7 +1663,8 @@ dependencies = [
  "k256",
  "lazy_static",
  "log",
- "num-bigint",
+ "num-bigint 0.3.0",
+ "num-bigint 0.3.3",
  "num-integer",
  "num-traits",
  "openssl",
