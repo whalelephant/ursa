@@ -16,6 +16,7 @@ use pair::*;
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet};
+use std::convert::{From, Into};
 use std::hash::Hash;
 use std::iter::FromIterator;
 
@@ -425,6 +426,18 @@ pub type Accumulator = PointG2;
 #[derive(Debug, Clone)]
 pub struct RevocationRegistry {
     accum: Accumulator,
+}
+
+impl From<Accumulator> for RevocationRegistry {
+    fn from(value: Accumulator) -> Self {
+        Self { accum: value }
+    }
+}
+
+impl Into<Accumulator> for RevocationRegistry {
+    fn into(self) -> Accumulator {
+        self.accum
+    }
 }
 
 impl From<RevocationRegistryDelta> for RevocationRegistry {
