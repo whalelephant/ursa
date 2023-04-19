@@ -76,7 +76,7 @@ fn _random_mod_order() -> UrsaCryptoResult<Big> {
     rng.clean();
     // AMCL recommends to initialise from at least 128 bytes, check doc for `RAND.seed`
     rng.seed(entropy_bytes, &seed);
-    Ok(Big::randomnum(&::new_ints(&CURVE_ORDER), &mut rng))
+    Ok(Big::randomnum(&Big::new_ints(&CURVE_ORDER), &mut rng))
 }
 
 #[derive(Copy, Clone, PartialEq)]
@@ -247,10 +247,10 @@ impl PointG2 {
         let point_ya = Big::new_ints(&CURVE_PYA);
         let point_yb = Big::new_ints(&CURVE_PYB);
 
-        let point_x = FP2::new_bigs(&point_xa, &point_xb);
-        let point_y = FP2::new_bigs(&point_ya, &point_yb);
+        let point_x = FP2::new_bigs(point_xa, point_xb);
+        let point_y = FP2::new_bigs(point_ya, point_yb);
 
-        let gen_g2 = ECP2::new_fp2s(&point_x, &point_y);
+        let gen_g2 = ECP2::new_fp2s(point_x, point_y);
 
         let point = g2mul(&gen_g2, &random_mod_order()?);
 
@@ -470,7 +470,7 @@ impl GroupOrderElement {
     }
 
     pub fn to_string(&self) -> UrsaCryptoResult<String> {
-        let mut bn = self.bn;
+        let bn = self.bn;
         Ok(bn.to_hex())
     }
 
@@ -481,7 +481,7 @@ impl GroupOrderElement {
     }
 
     pub fn to_bytes(&self) -> UrsaCryptoResult<Vec<u8>> {
-        let mut bn = self.bn;
+        let bn = self.bn;
         let mut vec = vec![0u8; Self::BYTES_REPR_SIZE];
         bn.to_bytes(&mut vec);
         Ok(vec)
@@ -512,7 +512,7 @@ impl GroupOrderElement {
 
 impl Debug for GroupOrderElement {
     fn fmt(&self, f: &mut Formatter) -> Result<(), Error> {
-        let mut bn = self.bn;
+        let bn = self.bn;
         write!(f, "GroupOrderElement {{ bn: {} }}", bn.to_hex())
     }
 }
@@ -617,7 +617,7 @@ impl Pair {
     }
 
     pub fn to_bytes(&self) -> UrsaCryptoResult<Vec<u8>> {
-        let mut r = self.pair;
+        let r = self.pair;
         let mut vec = vec![0u8; Self::BYTES_REPR_SIZE];
         r.to_bytes(&mut vec);
         Ok(vec)
