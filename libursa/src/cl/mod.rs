@@ -36,7 +36,7 @@ pub fn new_nonce() -> UrsaCryptoResult<Nonce> {
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Debug, Clone)]
 pub struct CredentialSchema {
-    attrs: BTreeSet<String>, /* attr names */
+    pub attrs: BTreeSet<String>, /* attr names */
 }
 
 /// A Builder of `Credential Schema`.
@@ -66,7 +66,7 @@ impl CredentialSchemaBuilder {
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Debug, Clone)]
 pub struct NonCredentialSchema {
-    attrs: BTreeSet<String>,
+    pub attrs: BTreeSet<String>,
 }
 
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
